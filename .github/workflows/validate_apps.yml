@@ -3,10 +3,10 @@ name: Validate One Click Apps
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
