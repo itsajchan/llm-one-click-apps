@@ -1,0 +1,45 @@
+captainVersion: 4
+services:
+  cap_appname:
+    command:
+    - --host
+    - 0.0.0.0
+    - --port
+    - '8080'
+    - --scheme
+    - http
+    image: cr.weaviate.io/semitechnologies/weaviate:$$cap_weaviate_version
+    ports:
+    - 8080:8080
+    - 50051:50051
+    volumes:
+    - $$cap_appname-weaviate-data:/var/lib/weaviate
+    restart: on-failure:0
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      DEFAULT_VECTORIZER_MODULE: 'text2vec-openai'
+      ENABLE_MODULES: 'text2vec-ollama,generative-ollama,text2vec-cohere,text2vec-huggingface,text2vec-palm,text2vec-openai,generative-openai,generative-cohere,generative-palm,ref2vec-centroid,reranker-cohere,qna-openai'
+      CLUSTER_HOSTNAME: 'node1'
+volumes:
+  $$cap_appname-weaviate-data:
+
+caproverOneClickApp:
+    variables:
+        - id: '$$cap_weaviate_version'
+          label: Weaviate Version
+          defaultValue: '1.25.1'
+          description: Open Source AI Native Vector Database
+          validRegex: '/.{1,}/'
+          
+    instructions:
+        start: |-
+            Weaviate is currently being set up.
+        end: |-
+            Weaviate has been deployed! Try connecting to it with the Python Client. 
+            Try the Quickstart [here](https://weaviate.io/developers/weaviate/quickstart)
+    displayName: Weaviate AI Native Vector Database
+    isOfficial: true
+    description: Open Source AI Native Vector Database
+    documentation: https://weaviate.io/developers/weaviate
