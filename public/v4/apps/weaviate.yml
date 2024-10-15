@@ -1,6 +1,6 @@
 captainVersion: 4
 services:
-  cap_appname:
+  weaviate:
     command:
     - --host
     - 0.0.0.0
@@ -29,7 +29,7 @@ caproverOneClickApp:
     variables:
         - id: '$$cap_weaviate_version'
           label: Weaviate Version
-          defaultValue: '1.25.1'
+          defaultValue: '1.26.6'
           description: Open Source AI Native Vector Database
           validRegex: '/.{1,}/'
           
